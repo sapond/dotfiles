@@ -113,10 +113,9 @@ function dh.stop {
 }
 
 function dh.full.restart {
-  cd $MY_WORKSPACE
   pkill -f blaze
   blaze clean
-  dh.restart
+  ops/netdeploy/netdesign/server/app_local.sh restart --storage_path=appengine.auto.hermetic
 }
 
 function dh.e2e.test.local {
@@ -125,11 +124,13 @@ function dh.e2e.test.local {
     blaze test --nocache_test_results --notest_loasd --test_strategy=local --test_output=streamed \
     //ops/netdeploy/netdesign/e2e:$1 \
     --test_arg="--params.tag=$2" \
-    --test_arg="--params.username=mmpatel"
+    --test_arg="--params.username=mmpatel" \
+    --test_arg="--params.useUnicode=true"
   else
-    blaze test --nocache_test_results --notest_loasd --test_strategy=local --test_output=streamed --test_timeout=30000 \
+    blaze test --nocache_test_results --notest_loasd --test_strategy=local --test_output=streamed --test_timeout=3600 \
     //ops/netdeploy/netdesign/e2e:$1 \
-    --test_arg="--params.username=mmpatel"
+    --test_arg="--params.username=mmpatel" \
+    --test_arg="--params.useUnicode=true"
   fi
 }
 
@@ -138,15 +139,22 @@ function dh.e2e.guitar {
     --cluster_name=doublehelix-web-e2e -c $1 -w 'doublehelix-e2e'
 }
 
+function dh.e2e.guitar.local {
+  /google/data/ro/projects/testing/integrate/local_guitar.par \
+  --config_file=ops/netdeploy/netdesign/e2e/guitar/dh_e2e_green.itcnf \
+  --override_all_client_specs \
+  --env_params="TESTTRACKER_EFFORT_ID=,TESTTRACKER_ENVIRONMENT="
+}
+
 function dh.e2e.forge {
   if [ "$2" ]
   then
-    blaze test --nocache_test_results --test_timeout=900 \
+    blaze test --nocache_test_results --test_timeout=3600 \
       //ops/netdeploy/netdesign/e2e:$1 \
       --test_arg="--params.tag=$2" \
       --test_arg="--params.isLaunchServerEnabled=true"
   else
-    blaze test --nocache_test_results --test_timeout=900 \
+    blaze test --nocache_test_results --test_timeout=3600 \
       //ops/netdeploy/netdesign/e2e:$1 \
       --test_arg="--params.isLaunchServerEnabled=true"
   fi
@@ -170,7 +178,16 @@ function dh.e2e.forge.streamed {
 
 function dh.start {
   #cd $MY_WORKSPACE
+  ops/netdeploy/netdesign/server/app_local.sh --storage_path=appengine.auto.hermetic
+}
+
+function dh.start {
+  #cd $MY_WORKSPACE
   ops/netdeploy/netdesign/server/app_local.sh
+}
+
+function dh.start.cns {
+  ops/netdeploy/netdesign/server/app_local.sh --storage_path=appengine.auto.hermetic
 }
 
 function dh.start.compressed {
@@ -199,7 +216,7 @@ function dh.test {
 }
 
 function dh.deploy {
-  cd $MY_WORKSPACE
+  #cd $MY_WORKSPACE
   if [ "$1" ]
   then
     ./ops/netdeploy/netdesign/server/app.sh default_only deploy $1
@@ -219,7 +236,7 @@ function dh.deploy.full {
 }
 
 function dh.karma {
-  cd $MY_WORKSPACE
+  #cd $MY_WORKSPACE
   blaze run ops/netdeploy/netdesign/client/test:all_unit_local
 }
 

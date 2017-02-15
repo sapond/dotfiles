@@ -125,12 +125,12 @@ function dh.e2e.test.local {
     //ops/netdeploy/netdesign/e2e:$1 \
     --test_arg="--params.tag=$2" \
     --test_arg="--params.username=mmpatel" \
-    --test_arg="--params.useUnicode=true"
+    --test_arg="--params.enableUnicodeSearchStrategy=true"
   else
     blaze test --nocache_test_results --notest_loasd --test_strategy=local --test_output=streamed --test_timeout=3600 \
     //ops/netdeploy/netdesign/e2e:$1 \
     --test_arg="--params.username=mmpatel" \
-    --test_arg="--params.useUnicode=true"
+    --test_arg="--params.enableUnicodeSearchStrategy=true"
   fi
 }
 
@@ -152,6 +152,9 @@ function dh.e2e.forge {
     blaze test --nocache_test_results --test_timeout=3600 \
       //ops/netdeploy/netdesign/e2e:$1 \
       --test_arg="--params.tag=$2" \
+      --test_arg="--params.username=mpatel" \
+      --test_arg="--params.enableUnicodeSearchStrategy=true" \
+      --test_arg="--params.isTrainingDataSetup=true" \
       --test_arg="--params.isLaunchServerEnabled=true"
   else
     blaze test --nocache_test_results --test_timeout=3600 \
@@ -177,6 +180,11 @@ function dh.e2e.forge.streamed {
 }
 
 function dh.start {
+  #cd $MY_WORKSPACE
+  ops/netdeploy/netdesign/server/app_local.sh
+}
+
+function dh.start.hermetic {
   #cd $MY_WORKSPACE
   ops/netdeploy/netdesign/server/app_local.sh --storage_path=appengine.auto.hermetic
 }

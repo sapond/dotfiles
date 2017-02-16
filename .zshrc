@@ -18,12 +18,14 @@ export E2E=$MY_WORKSPACE/blaze-bin/ops/netdeploy/netdesign/e2e/e2eAll_wrapped_mo
 export NODE_PATH=/usr/lib/node_modules:$HOME/node_modules:$E2E/node_modules:$MY_WORKSPACE/node_modules
 export MYE2E=$MY_WORKSPACE/ops/e2e
 export MYCLIENT=$MY_WORKSPACE/ops/client
+export EDITOR=nvim
 alias g5='git5'
 alias er='dh.e2e.prot e2eRackView'
 alias vi=nvim
 alias goo='tmux -2 new-session -A -s goo'
 alias restart_network='sudo service network-manager stop && sudo killall wpa_supplicant && sudo service network-manager start'
 alias restart_remote='/etc/init.d/chrome-remote-desktop restart'
+alias dh-e2e='ssh dh-e2e.dal.corp.google.com'
 
 function dh.e2e.train {
   ./ops/netdeploy/netdesign/e2e/e2e_local_setup.sh
@@ -115,7 +117,7 @@ function dh.stop {
 function dh.full.restart {
   pkill -f blaze
   blaze clean
-  ops/netdeploy/netdesign/server/app_local.sh restart --storage_path=appengine.auto.hermetic
+  ops/netdeploy/netdesign/server/app_local.sh
 }
 
 function dh.e2e.test.local {
@@ -186,7 +188,7 @@ function dh.start {
 
 function dh.start.hermetic {
   #cd $MY_WORKSPACE
-  ops/netdeploy/netdesign/server/app_local.sh --storage_path=appengine.auto.hermetic
+  ops/netdeploy/netdesign/server/app_local.sh start --storage_path=/tmp/appengine.auto.hermetic
 }
 
 function dh.start {
@@ -245,7 +247,7 @@ function dh.deploy.full {
 
 function dh.karma {
   #cd $MY_WORKSPACE
-  blaze run ops/netdeploy/netdesign/client/test:all_unit_local
+  iblaze run ops/netdeploy/netdesign/client/test:all_unit_local
 }
 
 function dh_import {

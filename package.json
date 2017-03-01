@@ -10,7 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "^3.12.2",
-    "eslint-config-google": "^0.7.1"
+    "eslint-config-google": "^0.7.1",
+    "typescript-eslint-parser": "^1.0.3"
   },
   "dependencies": {
     "eslint-config-google": "^0.7.1"

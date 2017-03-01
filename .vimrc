@@ -16,6 +16,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
+Plug 'tpope/vim-obsession'
 
 call plug#end()
 

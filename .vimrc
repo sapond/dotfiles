@@ -2,14 +2,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'airblade/vim-gitgutter'
 Plug 'mhartington/oceanic-next'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-fugitive'
-"Plug 'vim-airline/vim-airline'
 Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'heavenshell/vim-jsdoc'
@@ -22,8 +19,9 @@ call plug#end()
 
 autocmd! BufWritePost * Neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_html_enabled_makers = []
 syntax enable
-colorscheme OceanicNext
+"colorscheme OceanicNext
 "let g:airline_theme='oceanicnext'
 
 
@@ -116,17 +114,21 @@ augroup omnifuncs
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
 " tern
-if exists('g:plugs["tern_for_vim"]')
-  let g:tern_show_argument_hints = 'on_hold'
-  let g:tern_show_signature_in_pum = 1
-  autocmd FileType javascript setlocal omnifunc=tern#Complete
-endif
+"if exists('g:plugs["tern_for_vim"]')
+  "let g:tern_show_argument_hints = 'on_hold'
+  "let g:tern_show_signature_in_pum = 1
+  "autocmd FileType javascript setlocal omnifunc=tern#Complete
+"endif
 
 "deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " tern
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+"autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 nmap <silent> <C-l> <Plug>(jsdoc)
+
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
 
 
 

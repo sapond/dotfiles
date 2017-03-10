@@ -1,4 +1,7 @@
 source /google/data/ro/teams/fish/google.fish
+source ~/.config/fish/nvm-wrapper/nvm.fish
+
+nvm use stable
 
 alias vi=nvim
 alias wip='git commit -m "wip"'
@@ -19,7 +22,8 @@ set MYE2E $MY_WORKSPACE/ops/e2e
 set MYCLIENT $MY_WORKSPACE/ops/client
 set EDITOR nvim
 set PATH $PATH /usr/local/bin
-set PATH $PATH /usr/local/google/home/spond/.local/bin
+set PATH $PATH /usr/local/google/home/spond/projects/node_modules/.bin
+#set PATH $PATH /usr/local/google/home/spond/.local/bin
 
 function dh.e2e.train
   ./ops/netdeploy/netdesign/e2e/e2e_local_setup.sh

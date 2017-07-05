@@ -1,3 +1,5 @@
+output
+1
 tags*
 .jshintrc
 jsconfig.json
@@ -11,3 +13,6 @@ package.json
 .eslintrc
 .tern-port
 *.hermetic/
+protractor_run_local.sh
+selenium_server.log
+nohup.out

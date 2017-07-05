@@ -14,6 +14,8 @@ Plug 'majutsushi/tagbar'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'tpope/vim-obsession'
+Plug 'tamelion/neovim-molokai'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -21,10 +23,10 @@ autocmd! BufWritePost * Neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_html_enabled_makers = []
 syntax enable
-"colorscheme OceanicNext
+"let base16colorspace=256  " Access colors present in 256 colorspace
+"colorscheme base16-default-dark
+colorscheme OceanicNext
 "let g:airline_theme='oceanicnext'
-
-
 
 "se noerrorbells novisualbell t_vb=
 "autocmd GUIEnter * set vb t_vb=
@@ -94,7 +96,7 @@ endfunction
 command! -nargs=0 Git5Diff call Git5Diff()
 
 :hi ColorColumn ctermbg=grey guibg=grey
-colorscheme OceanicNext
+"colorscheme OceanicNext
 
 
 let g:deoplete#enable_at_startup = 1
@@ -129,11 +131,6 @@ nmap <silent> <C-l> <Plug>(jsdoc)
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
-
-
-
-
-
-
+autocmd FileType typescript source ~/.vim/lang_settings/text.vim
 
 

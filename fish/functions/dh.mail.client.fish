@@ -1,3 +1,4 @@
 function dh.mail.client
-	git5 mail -m schneiderr,samadlotia,skanigiri -f --cc=double-helix-team -b $argv[1] -e --no-body
+	echo $argv | read -l first rest
+ git5 mail -m schneiderr,samadlotia,skanigiri --fix --cc=double-helix-team -b $first -e --no-body $rest
 end
